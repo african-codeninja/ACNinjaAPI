@@ -11,11 +11,11 @@ using Newtonsoft.Json;
 namespace ACNinjaAPI.Controllers
 {
     [RoutePrefix("api/Householdservice")]
-    public class HouseServiceController : ApiController
+    public class HouseholdServiceController : ApiController
     {
         private ApiDbContext db = new ApiDbContext();
 
-        [Route("GetHouseholds")]
+        [Route("GetHousehold")]
         public async Task<List<Household>> GetHouseholds()
         {
             return await db.GetAllHouseholdData();

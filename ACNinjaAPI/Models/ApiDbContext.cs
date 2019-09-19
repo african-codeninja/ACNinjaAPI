@@ -25,9 +25,9 @@ namespace ACNinjaAPI.Models
 
         public async Task<List<Household>> GetAllHouseholdData()
         {
-            return await Database.SqlQuery<Household>("Gethousehold").ToListAsync();
+            return await Database.SqlQuery<Household>("GetHousehold").ToListAsync();
         }
-
+       
         //SQL Get Accounts
         public async Task<BankAccount> GetAccount(int accountId)
         {
