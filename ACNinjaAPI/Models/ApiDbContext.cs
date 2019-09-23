@@ -31,14 +31,47 @@ namespace ACNinjaAPI.Models
         //SQL Get Accounts
         public async Task<BankAccount> GetAccount(int accountId)
         {
-            return await Database.SqlQuery<BankAccount>("GetAccountDetail @accountId",
-                new SqlParameter("accountId", accountId)).FirstOrDefaultAsync();
+            return await Database.SqlQuery<BankAccount>("GetAccounts @householdId",
+                new SqlParameter("householdId", accountId)).FirstOrDefaultAsync();
         }
 
         public async Task<BankAccount> GetAccountDetails(int accountId)
         {
             return await Database.SqlQuery<BankAccount>("GetAccountDetail @accountId", 
                 new SqlParameter("accountId", accountId)).FirstOrDefaultAsync();
+        }
+
+        public async Task<List<Budget>> GetBudgets()
+        {
+            return await Database.SqlQuery<Budget>("GetBudgets").ToListAsync();
+        }
+
+        public async Task<Budget> GetBudgetDetails(int accountId)
+        {
+            return await Database.SqlQuery<Budget>("GetAccountDetail @hh1",
+                new SqlParameter("hh1", accountId)).FirstOrDefaultAsync();
+        }
+
+        public async Task<List<BudgetItem>> GetBudgetItems()
+        {
+            return await Database.SqlQuery<BudgetItem>("GetBudgetItems").ToListAsync();
+        }
+
+        public async Task<BudgetItem> GetBudgetItemDetails(int accountId)
+        {
+            return await Database.SqlQuery<BudgetItem>("GetAccountDetail @bitemsId",
+                new SqlParameter("bitemsId", accountId)).FirstOrDefaultAsync();
+        }
+
+        public async Task<List<Transaction>> GetTransactions()
+        {
+            return await Database.SqlQuery<Transaction>("GetHousehold").ToListAsync();
+        }
+
+        public async Task<Transaction> GetTransactionDetails(int accountId)
+        {
+            return await Database.SqlQuery<Transaction>("GetTransactionDetails @transId",
+                new SqlParameter("transId", accountId)).FirstOrDefaultAsync();
         }
     }
 }

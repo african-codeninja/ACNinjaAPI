@@ -2,23 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using ACNinjaAPI.Models;
 using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace ACNinjaAPI.Controllers
 {
     [RoutePrefix("api/Householdservice")]
     public class HouseholdServiceController : ApiController
     {
+        /// <summary>
+        /// This method generates all Households table data
+        /// </summary>
         private ApiDbContext db = new ApiDbContext();
 
-        [Route("GetHousehold")]
-        public async Task<List<Household>> GetHouseholds()
-        {
-            return await db.GetAllHouseholdData();
+        [Route("GetHouseholds")]
+        public Task<List<Household>> GetHouseholds()
+        {         
+            return db.GetAllHouseholdData();
         }
 
         [Route("GetHouseholds/json")]
