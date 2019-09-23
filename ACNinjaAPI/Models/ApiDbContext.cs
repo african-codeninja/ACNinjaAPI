@@ -29,10 +29,9 @@ namespace ACNinjaAPI.Models
         }
        
         //SQL Get Accounts
-        public async Task<BankAccount> GetAccount(int accountId)
+        public async Task<List<BankAccount>> GetAccountData()
         {
-            return await Database.SqlQuery<BankAccount>("GetAccounts @householdId",
-                new SqlParameter("householdId", accountId)).FirstOrDefaultAsync();
+            return await Database.SqlQuery<BankAccount>("GetAccounts").ToListAsync();           
         }
 
         public async Task<BankAccount> GetAccountDetails(int accountId)

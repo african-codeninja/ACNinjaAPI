@@ -23,14 +23,11 @@ namespace ACNinjaAPI.Controllers
         /// <summary>
         /// Runs the query to gather bank account data
         /// </summary>
-        /// <param name="accountId"></param>
         /// <returns></returns>
         [Route("GetBankAccounts")]
-        public Task<List<BankAccount>> GetAccount(int accountId)
-        {
-            var accountdata = GetAccount(accountId);
-
-            return accountdata;
+        public Task<List<BankAccount>> GetBankAccounts()
+        {          
+            return db.GetAccountData();
         }
 
         /// <summary>
@@ -42,7 +39,7 @@ namespace ACNinjaAPI.Controllers
         public async Task<IHttpActionResult> GetAccountAsJson(int accountId)
         {
             var serializerSettings = new JsonSerializerSettings { Formatting = Formatting.Indented };
-            var data = await db.GetAccount(accountId);
+            var data = await db.GetAccountData();
             return Json(data, serializerSettings);
         }
 

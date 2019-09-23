@@ -10,6 +10,9 @@ using System.Runtime.Serialization;
 
 namespace ACNinjaAPI.Controllers
 {
+    /// <summary>
+    /// Another comments
+    /// </summary>
     [RoutePrefix("api/Householdservice")]
     public class HouseholdServiceController : ApiController
     {
