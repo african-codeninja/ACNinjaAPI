@@ -11,22 +11,32 @@ using System.Runtime.Serialization;
 namespace ACNinjaAPI.Controllers
 {
     /// <summary>
-    /// Another comments
+    /// Primary API to retrieve Household data
     /// </summary>
     [RoutePrefix("api/Householdservice")]
     public class HouseholdServiceController : ApiController
     {
-        /// <summary>
-        /// This method generates all Households table data
-        /// </summary>
         private ApiDbContext db = new ApiDbContext();
-
+        /// <summary>
+        /// Runs SQL query that returns all houshold data
+        /// </summary>
+        /// <remarks>
+        /// Current version of API retruns all household data held in table
+        /// </remarks>
+        /// <returns>return db.GetAllHouseholdData();</returns>
         [Route("GetHouseholds")]
         public Task<List<Household>> GetHouseholds()
         {         
             return db.GetAllHouseholdData();
         }
 
+        /// <summary>
+        /// Runs SQL query that returns all houshold data in Json Format
+        /// </summary>
+        /// <remarks>
+        /// Current version of API retruns all household data held in table in Json format
+        /// </remarks>
+        /// <returns>GetAllhouseholdData</returns>
         [Route("GetHouseholds/json")]
         public async Task<IHttpActionResult> GetHouseholdsAsJson()
         {
