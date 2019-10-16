@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace ACNinjaAPI.Controllers
 {
@@ -26,7 +27,7 @@ namespace ACNinjaAPI.Controllers
         /// </remarks>
         /// <returns>GetAllbudgetitems</returns>
         [Route("GetAllBudgetItems")]
-        public Task<List<BudgetItem>> GeAlltBudgetItems()
+        public Task<List<BudgetItem>> GetAllBudgetItems()
         {
             return db.GetBudgetItems();
         }
@@ -38,6 +39,7 @@ namespace ACNinjaAPI.Controllers
         /// Current version of this API Returns all Budget Items found in Budget items Table as a Json  output
         /// </remarks>
         /// <returns>GetAllBUdgetItemsasJson</returns>
+        [ResponseType(typeof(BudgetItem))]
         [Route("GetAllBudgetItems/json")]
         public async Task<IHttpActionResult> GetAllBudgetItemsAsJson()
         {
@@ -70,6 +72,7 @@ namespace ACNinjaAPI.Controllers
         /// </remarks>
         /// <param name="budgetItemId"></param>
         /// <returns></returns>
+        [ResponseType(typeof(BudgetItem))]
         [Route("GetBudetItemDetails/json")]
         public async Task<IHttpActionResult> GetBudgetItemDetailsAsJson(int budgetItemId)
         {

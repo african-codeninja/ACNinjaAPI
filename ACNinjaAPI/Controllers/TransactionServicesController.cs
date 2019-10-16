@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace ACNinjaAPI.Controllers
 {
@@ -40,6 +41,7 @@ namespace ACNinjaAPI.Controllers
         /// Current version of API returns all transactions as recoreded on the transactions table in Json format
         /// </remarks>
         /// <returns></returns>
+        [ResponseType(typeof(Transaction))]
         [Route("GetTransactions/json")]
         public async Task<IHttpActionResult> GetAccountAsJson()
         {
@@ -72,6 +74,7 @@ namespace ACNinjaAPI.Controllers
         /// </remarks>
         /// <param name="transactionId"></param>
         /// <returns></returns>
+        [ResponseType(typeof(Transaction))]
         [Route("GetTransactionDetails/json")]
         public async Task<IHttpActionResult> GetTransactionDetailsAsJson(int transactionId)
         {
@@ -80,5 +83,37 @@ namespace ACNinjaAPI.Controllers
             return Json(data, serializerSettings);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="BankAccountId"></param>
+        /// <param name="BudgetItemId"></param>
+        /// <param name="TransactionTypeId"></param>
+        /// <param name="EnteredById"></param>
+        /// <param name="Amount"></param>
+        /// <param name="Payee"></param>
+        /// <param name="Description"></param>
+        /// <param name="Created"></param>
+        /// <param name="Reconciled"></param>
+        /// <param name="ReconciledDate"></param>
+        /// <returns></returns>
+        [Route("AddTransaction")]       
+        public async Task<IHttpActionResult> AddTransactionAsyn
+                                                (
+                            int BankAccountId,
+                            int? BudgetItemId,
+                            string TransactionTypeId,
+                            int EnteredById,
+                            int Amount,
+                            string Payee,
+                            string Description,
+                            DateTimeOffset Created,
+                            bool Reconciled,
+                            DateTimeOffset? ReconciledDate
+                            )
+        {
+            return Ok(await db.AddTransaction(BankAccountId, BudgetItemId, TransactionTypeId, EnteredById, Amount, Payee, Description, Created, Reconciled, ReconciledDate));
+        }
+        
     }
 }

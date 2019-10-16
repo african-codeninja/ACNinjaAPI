@@ -7,6 +7,7 @@ using System.Web.Http;
 using ACNinjaAPI.Models;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System.Web.Http.Description;
 
 namespace ACNinjaAPI.Controllers
 {
@@ -39,6 +40,7 @@ namespace ACNinjaAPI.Controllers
         /// </remarks>
         /// <param name="accountId"></param>
         /// <returns>GetAllAccountsData</returns>
+        [ResponseType(typeof(BankAccount))]
         [Route("GetBankAccounts/json")]
         public async Task<IHttpActionResult> GetAccountAsJson(int accountId)
         {
@@ -71,6 +73,7 @@ namespace ACNinjaAPI.Controllers
         /// </remarks>
         /// <param name="accountId"></param>
         /// <returns>GetAccountDetails</returns>
+        [ResponseType(typeof(BankAccount))]
         [Route("GetBankAccountDetails/json")]
         public async Task<IHttpActionResult> GetAccountDetailsAsJson(int accountId)
         {

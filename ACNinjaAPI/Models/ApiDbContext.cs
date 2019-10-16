@@ -5,28 +5,47 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Http;
 
 namespace ACNinjaAPI.Models
 {
     /// <summary>
-    /// Main Database connector
+    /// Custom Db Connector
     /// </summary>
     public class ApiDbContext : DbContext
     {
         /// <summary>
-        /// 
+        /// Pass Connection String label to DBContext
         /// </summary>
         public ApiDbContext() : base("ACNPortalAPI") { }  
-
+        /// <summary>
+        /// Creat a new DB Context
+        /// </summary>
+        /// <returns></returns>
         public static ApiDbContext Create()
         {
             return new ApiDbContext();
         }
 
+        /// <summary>
+        /// Bank Account DBSet
+        /// </summary>
         public DbSet<BankAccount> BankAccounts { get; set; }
+        /// <summary>
+        /// Households DBset
+        /// </summary>
         public DbSet<Household> Households { get; set; }
+        /// <summary>
+        /// Budgets DBset
+        /// </summary>
         public DbSet<Budget> MyBudget { get; set; }
+        /// <summary>
+        /// BUdget Items DBset
+        /// </summary>
         public DbSet<BudgetItem> BudgetItems { get; set; }
+        /// <summary>
+        /// Transactions DBset
+        /// </summary>
         public DbSet<Transaction> Transactions { get; set; }
 
         /// <summary>
@@ -50,7 +69,7 @@ namespace ACNinjaAPI.Models
         /// <summary>
         /// Runs query that get account
         /// </summary>
-        /// <param name="accountId"></param>
+        /// <param name="accountId">Bank Account Id</param>
         /// <returns>Gets Account data associated with a specific Account Id</returns>
         public async Task<BankAccount> GetAccountDetails(int accountId)
         {
@@ -61,7 +80,7 @@ namespace ACNinjaAPI.Models
         /// <summary>
         /// Returns a list of all Budgets
         /// </summary>
-        /// <returns></returns>
+        /// <returns>GetallBudgets</returns>
         public async Task<List<Budget>> GetBudgets()
         {
             return await Database.SqlQuery<Budget>("GetBudgets").ToListAsync();
@@ -117,6 +136,96 @@ namespace ACNinjaAPI.Models
         {
             return await Database.SqlQuery<Transaction>("GetTransactionsDetails @transId",
                 new SqlParameter("transId", transactionId)).FirstOrDefaultAsync();
+        }
+
+
+        public async Task<int> AddAccount(
+                                        int householdId, 
+                                        string accountName, 
+                                        int accountType, 
+                                        decimal startingBalance, 
+                                        decimal lowBalanceLevel, 
+                                        decimal currentBalance
+                                        )
+        {
+            return await Database.ExecuteSqlCommandAsync("AddAccount @householdId, @accountName, @accountType, @startingBalance, @lowBalanceLevel, @currentBalance",
+                new SqlParameter("householdId", householdId),
+                new SqlParameter("accountName", accountName),
+                new SqlParameter("accountType", accountType),
+                new SqlParameter("startingBalance", startingBalance),
+                new SqlParameter("lowBalanceLevel", lowBalanceLevel),
+                new SqlParameter("currentBalance", currentBalance)
+                );
+        }
+
+        public async Task<int> AddBudget(
+                                        int householdId, 
+                                        string budgetCategoryName, 
+                                        decimal targetAmount)
+        {
+            return await Database.ExecuteSqlCommandAsync("AddBudget @householdId, @budgetCategoryName, @targetAmount",
+                new SqlParameter("householdId", householdId),
+                new SqlParameter("budgetCategoryName", budgetCategoryName),
+                new SqlParameter("targetAmount", targetAmount)
+                );
+        }
+
+        public async Task<int> AddTransaction(
+                                        int bankAccountId, 
+                                        int? budgetCategoryItemId, 
+                                        string createdById, 
+                                        decimal amount, 
+                                        int transactionType, 
+                                        string payee, 
+                                        string memo, 
+                                        DateTimeOffset created, 
+                                        bool reconciled, 
+                                        DateTimeOffset? reconciledDate)
+        {
+            return await Database.ExecuteSqlCommandAsync("AddTransaction @bankAccountId, @budgetCategoryItemId, @createdById, @amount, @transactionType, @payee, @memo, @created, @reconciled, @reconciledDate",
+                new SqlParameter("bankAccountId", bankAccountId),
+                new SqlParameter("budgetCategoryItemId", budgetCategoryItemId),
+                new SqlParameter("createdById", createdById),
+                new SqlParameter("amount", amount),
+                new SqlParameter("transactionType", transactionType),
+                new SqlParameter("payee", payee),
+                new SqlParameter("memo", memo),
+                new SqlParameter("created", created),
+                new SqlParameter("reconciled", reconciled),
+                new SqlParameter("reconciledDate", reconciledDate)
+                );
+        }
+
+        /// <summary>
+        /// Api for Updating account update
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="transAmount"></param>
+        /// <param name="transType"></param>
+        /// <returns></returns>
+        public async Task<int> UpdateAccount(
+                                            int id, 
+                                            decimal transAmount, 
+                                            int transType
+                                            )
+        {
+            return await Database.ExecuteSqlCommandAsync("UpdateAccount @id, @transAmount, @transType",
+                new SqlParameter("id", id),
+                new SqlParameter("transAmount", transAmount),
+                new SqlParameter("transType", transType)
+                );
+        }
+
+        /// <summary>
+        /// Api for Deleting a transaction entry
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<int> DeleteTransaction(int id)
+        {
+            return await Database.ExecuteSqlCommandAsync("DeleteTransaction @id",
+                new SqlParameter("id", id)
+                );
         }
     }
 }

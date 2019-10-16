@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace ACNinjaAPI.Controllers
 {
@@ -37,6 +38,7 @@ namespace ACNinjaAPI.Controllers
         /// Current version of API return all budgets from the budgets table in Json format
         /// </remarks>
         /// <returns></returns>
+        [ResponseType(typeof(Budget))]
         [Route("GetBudget/json")]
         public async Task<IHttpActionResult> GetBudgetItemsAsJson()
         {
@@ -69,6 +71,7 @@ namespace ACNinjaAPI.Controllers
         /// </remarks>
         /// <param name="budgetId"></param>
         /// <returns>return Json(data, serializerSettings);</returns>
+        [ResponseType(typeof(Budget))]
         [Route("GetBudetItemDetails/json")]
         public async Task<IHttpActionResult> GetBudgetDetailsAsJson(int budgetId)
         {

@@ -5,6 +5,9 @@ using System.Web.Http.Description;
 
 namespace ACNinjaAPI.Areas.HelpPage
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class ApiDescriptionExtensions
     {
         /// <summary>

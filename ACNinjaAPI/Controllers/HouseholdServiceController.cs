@@ -7,6 +7,7 @@ using System.Web.Http;
 using ACNinjaAPI.Models;
 using Newtonsoft.Json;
 using System.Runtime.Serialization;
+using System.Web.Http.Description;
 
 namespace ACNinjaAPI.Controllers
 {
@@ -37,6 +38,7 @@ namespace ACNinjaAPI.Controllers
         /// Current version of API retruns all household data held in table in Json format
         /// </remarks>
         /// <returns>GetAllhouseholdData</returns>
+        [ResponseType(typeof(Household))]
         [Route("GetHouseholds/json")]
         public async Task<IHttpActionResult> GetHouseholdsAsJson()
         {

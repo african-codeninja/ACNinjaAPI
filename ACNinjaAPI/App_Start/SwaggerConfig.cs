@@ -7,8 +7,14 @@ using Swashbuckle.Application;
 
 namespace ACNinjaAPI
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class SwaggerConfig
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public static void Register()
         {
             var thisAssembly = typeof(SwaggerConfig).Assembly;
@@ -32,7 +38,7 @@ namespace ACNinjaAPI
                         // hold additional metadata for an API. Version and title are required but you can also provide
                         // additional fields by chaining methods off SingleApiVersion.
                         //
-                        c.SingleApiVersion("v1", "ACN API");
+                        c.SingleApiVersion("v1", "ACN API BY Moses Mwangi");
 
                         // If your API has multiple versions, use "MultipleApiVersions" instead of "SingleApiVersion".
                         // In this case, you must provide a lambda that tells Swashbuckle which actions should be
@@ -168,13 +174,13 @@ namespace ACNinjaAPI
                         // The file must be included in your project as an "Embedded Resource", and then the resource's
                         // "Logical Name" is passed to the method as shown below.
                         //
-                        //c.InjectStylesheet(containingAssembly, "Swashbuckle.Dummy.SwaggerExtensions.testStyles1.css");
+                        c.InjectStylesheet(thisAssembly, "ACNinjaAPI.Content.CustomSwagger.css");
 
                         // Use the "InjectJavaScript" option to invoke one or more custom JavaScripts after the swagger-ui
                         // has loaded. The file must be included in your project as an "Embedded Resource", and then the resource's
                         // "Logical Name" is passed to the method as shown above.
                         //
-                        //c.InjectJavaScript(thisAssembly, "Swashbuckle.Dummy.SwaggerExtensions.testScript1.js");
+                        c.InjectJavaScript(thisAssembly, "ACNinjaAPI.Scripts.CustomSwagger.js");
 
                         // The swagger-ui renders boolean data types as a dropdown. By default, it provides "true" and "false"
                         // strings as the possible choices. You can use this option to change these to something else,

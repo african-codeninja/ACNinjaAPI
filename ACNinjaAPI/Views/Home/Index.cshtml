@@ -1,31 +1,141 @@
-﻿@model ACNinjaAPI.Models.Household
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
-    </div>
-</div>
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Moses Financial Portal API
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <!-- CSS Files -->
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/paper-dashboard.css" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="/Content/demo.css" rel="stylesheet" />
+</head>
 
-<div class="row">
-    <p><h1>@Model.Name</h1></p>
-</div>
+<body class="login-page">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+        <div class="container">
+            <div class="navbar-wrapper">
+                <div class="navbar-toggle">
+                    <button type="button" class="navbar-toggler">
+                        <span class="navbar-toggler-bar bar1"></span>
+                        <span class="navbar-toggler-bar bar2"></span>
+                        <span class="navbar-toggler-bar bar3"></span>
+                    </button>
+                </div>
+                <a class="navbar-brand" href="">ACN Financial Portal API</a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                <ul class="navbar-nav">
+                    <li class="nav-item my-class">
+                    @Html.ActionLink("SWAGGER API", "Index", "swagger",null , new {style = "color: white;" , area = "" })
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="wrapper wrapper-full-page ">
+        <div class="full-page section-image" filter-color="black" data-color="blue" data-image="/Images/money-main.jpg">
+            <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+            <div class="content">
+                <div class="container">
+                    <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+                    </div>
+                </div>
+            </div>
+            <footer class="footer footer-black  footer-white ">
+                <div class="container-fluid">
+                    <div class="row">
+                        <nav class="footer-nav">
+                            <ul>                                
+                                <li>
+                                    <a href="https://mosesprofile.azurewebsites.net/" target="_blank">My Portfolio</a>
+                                </li>
+                                <li>
+                                    <a href="https://mwangiblog2.azurewebsites.net/" target="_blank">My Blog</a>
+                                </li>
+                                <li>
+                                    <a href="https://acnbugtracker.azurewebsites.net" target="_blank">ACN BugTracker</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="credits ml-auto">
+                            <span class="copyright">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>, made with <i class="fa fa-heart heart"></i> by Moses Mbutha Mwangi
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
 
+    <!--   Core JS Files   -->
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/perfect-scrollbar.jquery.min.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
+    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+    <script src="~/Scripts/bootstrap-switch.js"></script>
+    <!--  Plugin for Sweet Alert -->
+    <script src="~/Scripts/sweetalert2.min.js"></script>
+    <!-- Forms Validations Plugin -->
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <!--  Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+    <script src="~/Scripts/jquery.bootstrap-wizard.js"></script>
+    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <script src="~/Scripts/bootstrap-selectpicker.js"></script>
+    <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <!--  DataTables.net Plugin, full documentation here: https://datatables.net/    -->
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+    <script src="~/Scripts/bootstrap-tagsinput.js"></script>
+    <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+    <script src="~/Scripts/jasny-bootstrap.min.js"></script>
+    <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+    <script src="~/Scripts/fullcalendar.min.js"></script>
+    <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+    <script src="~/Scripts/jquery-jvectormap.js"></script>
+    <!--  Plugin for the Bootstrap Table -->
+    <script src="~/Scripts/nouislider.min.js"></script>
+    <!--  Google Maps Plugin    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <!-- Chart JS -->
+    <script src="~/Scripts/chartjs.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="~/Scripts/bootstrap-notify.js"></script>
+    <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="~/Scripts/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script>
+    <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+    <script src="~/Scripts/demo.js"></script>
+    <script>
+        $(document).ready(function () {
+            demo.checkFullPageBackgroundImage();
+        });
+    </script>
+</body>
+
+</html>
