@@ -265,6 +265,7 @@
     <Content Include="fonts\nucleo-icons.woff" />
     <Content Include="fonts\nucleo-icons.woff2" />
     <None Include="Properties\PublishProfiles\ACNapi - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\ACNwebapi - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
