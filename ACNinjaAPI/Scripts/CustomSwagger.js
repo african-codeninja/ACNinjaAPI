@@ -1,6 +1,6 @@
 ﻿$(function () {
     $("#logo").text("ACN API");
-    $("#logo").attr("href", "https://acnapi.azurewebsites.net");
+    $("#logo").attr("href", "https://acnwebapi.azurewebsites.net");
 
     $("title").text("ACN API")
 
