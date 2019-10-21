@@ -54,7 +54,7 @@ namespace ACNinjaAPI.Models
         /// <returns></returns>
         public async Task<List<Household>> GetAllHouseholdData()
         {
-            return await Database.SqlQuery<Household>("GetHousehold").ToListAsync();
+            return await Database.SqlQuery<Household>("GetHouseHold").ToListAsync();
         }
        
         /// <summary>
@@ -63,7 +63,7 @@ namespace ACNinjaAPI.Models
         /// <returns>Gets All account Data</returns>
         public async Task<List<BankAccount>> GetAllAccountData()
         {
-            return await Database.SqlQuery<BankAccount>("GetAccounts").ToListAsync();           
+            return await Database.SqlQuery<BankAccount>("GetAllAccounts").ToListAsync();           
         }
 
         /// <summary>
@@ -73,8 +73,8 @@ namespace ACNinjaAPI.Models
         /// <returns>Gets Account data associated with a specific Account Id</returns>
         public async Task<BankAccount> GetAccountDetails(int accountId)
         {
-            return await Database.SqlQuery<BankAccount>("GetAccountsDetails @accountId", 
-                new SqlParameter("accountId", accountId)).FirstOrDefaultAsync();
+            return await Database.SqlQuery<BankAccount>("GetBankAccountDetails @bankId", 
+                new SqlParameter("bankId", accountId)).FirstOrDefaultAsync();
         }
 
         /// <summary>
@@ -93,8 +93,8 @@ namespace ACNinjaAPI.Models
         /// <returns></returns>
         public async Task<Budget> GetBudgetDetails(int budgetId)
         {
-            return await Database.SqlQuery<Budget>("GetBudgetDetails @hh1",
-                new SqlParameter("hh1", budgetId)).FirstOrDefaultAsync();
+            return await Database.SqlQuery<Budget>("GetBudgetDetails @budgetId",
+                new SqlParameter("@budgetId", budgetId)).FirstOrDefaultAsync();
         }
 
 
@@ -114,8 +114,8 @@ namespace ACNinjaAPI.Models
         /// <returns>Getbudgetitemdetails</returns>
         public async Task<BudgetItem> GetBudgetItemDetails(int budgetItemId)
         {
-            return await Database.SqlQuery<BudgetItem>("GetBudgetItemDetails @bitemsId",
-                new SqlParameter("bitemsId", budgetItemId)).FirstOrDefaultAsync();
+            return await Database.SqlQuery<BudgetItem>("GetBudgetItemDetails @budgetItemsId",
+                new SqlParameter("budgetItemsId", budgetItemId)).FirstOrDefaultAsync();
         }
 
         /// <summary>
@@ -134,11 +134,20 @@ namespace ACNinjaAPI.Models
         /// <returns></returns>
         public async Task<Transaction> GetTransactionDetails(int transactionId)
         {
-            return await Database.SqlQuery<Transaction>("GetTransactionsDetails @transId",
+            return await Database.SqlQuery<Transaction>("GetTransactionDetails @transId",
                 new SqlParameter("transId", transactionId)).FirstOrDefaultAsync();
         }
 
-
+        /// <summary>
+        /// Adding a bank acount to the Bank Account table
+        /// </summary>
+        /// <param name="householdId"></param>
+        /// <param name="accountName"></param>
+        /// <param name="accountType"></param>
+        /// <param name="startingBalance"></param>
+        /// <param name="lowBalanceLevel"></param>
+        /// <param name="currentBalance"></param>
+        /// <returns></returns>
         public async Task<int> AddAccount(
                                         int householdId, 
                                         string accountName, 
@@ -158,6 +167,13 @@ namespace ACNinjaAPI.Models
                 );
         }
 
+        /// <summary>
+        /// Adding a budget category to the budget table
+        /// </summary>
+        /// <param name="householdId"></param>
+        /// <param name="budgetCategoryName"></param>
+        /// <param name="targetAmount"></param>
+        /// <returns></returns>
         public async Task<int> AddBudget(
                                         int householdId, 
                                         string budgetCategoryName, 
@@ -170,6 +186,20 @@ namespace ACNinjaAPI.Models
                 );
         }
 
+        /// <summary>
+        /// Adding a Transaction to the transactions table
+        /// </summary>
+        /// <param name="bankAccountId"></param>
+        /// <param name="budgetCategoryItemId"></param>
+        /// <param name="createdById"></param>
+        /// <param name="amount"></param>
+        /// <param name="transactionType"></param>
+        /// <param name="payee"></param>
+        /// <param name="memo"></param>
+        /// <param name="created"></param>
+        /// <param name="reconciled"></param>
+        /// <param name="reconciledDate"></param>
+        /// <returns></returns>
         public async Task<int> AddTransaction(
                                         int bankAccountId, 
                                         int? budgetCategoryItemId, 
